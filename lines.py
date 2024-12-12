@@ -6,6 +6,7 @@ def main():
         file_path = sys.argv[1]
         if not file_path.endswith(".py"):
             print(f"Not a python file")
+            sys.exit(1)
         try:
             file =open(file_path, "r")
         except FileNotFoundError:
@@ -13,10 +14,9 @@ def main():
             sys.exit(1)
         else:
             program_lines = [line.strip(" ").strip("\t") for line in file.readlines()]
-            print(f"Lines {program_lines}")
+
             formated_lines = [line for line in program_lines if not line.startswith("#") and not line.isspace()]
-            
-            print(f"{file_path} has {len(formated_lines)} lines")
+            print(len(formated_lines))
             return len(formated_lines)
         finally:
             file.close()
